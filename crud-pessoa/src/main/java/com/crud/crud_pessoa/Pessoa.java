@@ -18,7 +18,6 @@ public class Pessoa {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
