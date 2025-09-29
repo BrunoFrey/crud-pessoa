@@ -15,7 +15,6 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
