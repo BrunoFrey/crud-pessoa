@@ -1,37 +1,31 @@
 package com.crud.crud_pessoa;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pessoas")
 public class PessoaController {
 
     @Autowired
-    private PessoaRepository repo;
+    PessoaRepository repo;
 
-    @GetMapping
-    public List<Pessoa> getAll() {
+    @GetMapping("/pessoas")
+    List<Pessoa> verPessoas() {
         return repo.findAll();
     }
 
-    @PostMapping
-    public Pessoa create(@RequestBody Pessoa pessoa) {
-        return repo.save(pessoa);
+    @PostMapping("/pessoas")
+    String addPessoa(@RequestBody Pessoa p) {
+        repo.save(p);
+        return "Usúario cadastrado!";
     }
 
-    @PutMapping("/{id}")
-    public Pessoa update(@PathVariable Long id, @RequestBody Pessoa pessoa) {
-        pessoa.setId(id);
-        return repo.save(pessoa);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    @DeleteMapping("/pessoas/{id}")
+    String excluirPessoa(@PathVariable Long id) {
         repo.deleteById(id);
+        return "Usúario excluído!";
     }
 }
 
-interface PessoaRepository extends JpaRepository<Pessoa, Long> {}
+interface PessoaRepository extends org.springframework.data.jpa.repository.JpaRepository<Pessoa, Long> {}
